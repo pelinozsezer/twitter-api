@@ -8,11 +8,11 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.twitter-clone-api</groupId>
-	<artifactId>twitter-clone-api</artifactId>
+	<groupId>com.workintech</groupId>
+	<artifactId>twitter_clone_api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Twitter Clone API</name>
-	<description>A simple RESTful API built with Spring Boot that replicates core Twitter features such as user registration, tweeting, following, and timeline generation. Designed for learning and practicing backend development with Java and Spring.</description>
+	<description>Twitter Clone API</description>
 	<url/>
 	<licenses>
 		<license/>

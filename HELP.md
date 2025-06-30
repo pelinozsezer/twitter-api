@@ -1,8 +1,3 @@
-# Read Me First
-The following was discovered as part of building this project:
-
-* The original package name 'com.twitter-clone-api' is invalid and this project uses 'com.twitter_clone_api' instead.
-
 # Getting Started
 
 ### Reference Documentation

@@ -1,4 +1,4 @@
-package com.twitter_clone_api;
+package com.workintech.twitter_clone_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
