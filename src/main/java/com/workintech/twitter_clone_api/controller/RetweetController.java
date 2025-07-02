@@ -6,6 +6,7 @@ import com.workintech.twitter_clone_api.service.RetweetService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,14 +18,15 @@ public class RetweetController {
 
     @PostMapping
     public ResponseEntity<Retweet> retweet(@Valid @RequestBody RetweetRequest request) {
-        Retweet created = retweetService.retweet(request);
-        return ResponseEntity.status(201).body(created);
+        Retweet createdRetweet = retweetService.retweet(request);
+        return ResponseEntity.status(201).body(createdRetweet);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRetweet(@PathVariable Long id,
-                                                @RequestParam Long userId) {
-        retweetService.deleteRetweet(id, userId);
+    public ResponseEntity<String> deleteRetweet(@PathVariable Integer id, Authentication authentication) {
+        String username = authentication.getName();
+        retweetService.deleteRetweet(id, username);
         return ResponseEntity.ok("Retweet successfully deleted.");
     }
+
 }

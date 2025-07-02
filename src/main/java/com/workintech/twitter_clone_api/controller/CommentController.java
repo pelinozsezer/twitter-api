@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 @RestController
 @RequestMapping("/comment")
@@ -23,17 +24,19 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id,
-                                                 @RequestParam Long userId,
-                                                 @Valid @RequestBody CommentUpdateRequest updateRequest) {
-        Comment updatedComment = commentService.updateComment(id, userId, updateRequest);
+    public ResponseEntity<Comment> updateComment(@PathVariable Integer id,
+                                                 @Valid @RequestBody CommentUpdateRequest updateRequest,
+                                                 Authentication authentication) {
+        String username = authentication.getName(); // security
+        Comment updatedComment = commentService.updateComment(id, updateRequest, username);
         return ResponseEntity.ok(updatedComment);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteComment(@PathVariable Long id,
-                                                @RequestParam Long userId) {
-        commentService.deleteComment(id, userId);
-        return ResponseEntity.ok("Comment successfully deleted.");
+    public ResponseEntity<Void> deleteComment(@PathVariable Integer id, Authentication authentication) {
+        String username = authentication.getName();
+        commentService.deleteComment(id, username);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
+
 }

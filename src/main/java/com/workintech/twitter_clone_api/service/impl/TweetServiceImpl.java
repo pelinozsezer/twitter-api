@@ -18,9 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TweetServiceImpl implements TweetService {
 
-    @Autowired
     private final TweetRepository tweetRepository;
-    @Autowired
     private final UserRepository userRepository;
 
     @Override
@@ -36,7 +34,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tweet> getTweetsByUserId(Long userId) {
+    public List<Tweet> getTweetsByUserId(Integer userId) {
         if (!userRepository.existsById(userId)) {
             throw new ResourceNotFoundException("User not found with id: " + userId);
         }
@@ -44,13 +42,13 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public Tweet getTweetById(Long id) {
+    public Tweet getTweetById(Integer id) {
         return tweetRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tweet not found with id: " + id));
     }
 
     @Override
-    public Tweet updateTweet(Long id, TweetUpdateRequest updateRequest) {
+    public Tweet updateTweet(Integer id, TweetUpdateRequest updateRequest) {
         Tweet tweet = tweetRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tweet not found with id: " + id));
 
@@ -59,14 +57,11 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void deleteTweet(Long tweetId, Long userId) {
+    public void deleteTweet(Integer tweetId) {
         Tweet tweet = tweetRepository.findById(tweetId)
                 .orElseThrow(() -> new ResourceNotFoundException("Tweet not found with id: " + tweetId));
 
-        if (!tweet.getUser().getId().equals(userId)) {
-            throw new SecurityException("You are not allowed to delete this tweet.");
-        }
-
         tweetRepository.delete(tweet);
     }
+
 }

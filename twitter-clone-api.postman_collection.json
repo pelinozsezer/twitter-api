@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "bee0d316-f1b9-46b9-9e4b-4039840d5dcc",
+		"name": "twitter-clone-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45694875"
+	},
+	"item": [
+		{
+			"name": "EASY",
+			"item": [
+				{
+					"name": "register testuser1",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser1\",\n  \"email\": \"test1@example.com\",\n  \"password\": \"123456\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser2",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser2\",\n  \"email\": \"test2@example.com\",\n  \"password\": \"123456\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register testuser1 again",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@example.com\",\n  \"password\": \"123456\"\n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Creating and saving a tweet to the database.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test1@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"My first tweet!\",\n  \"userId\": 1\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/tweet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"tweet"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve all tweets of a user.",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/tweet/findByUserId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"tweet",
+								"findByUserId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update editable fields of a tweet.",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/tweet/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"tweet",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletes the tweet with the given ID. Only the tweet owner is allowed to delete it.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test1@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/tweet/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"tweet",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "1. [http://localhost:3000/tweet[POST]](http://localhost:3000/tweet[POST]) => Tweet oluşturma ve veritabanına kaydetme. Tweet'in hangi kullanıcıya ait olduğu mutlaka tutulmalıdır. Anonym tweetler olmamalıdır.\n    \n2. [http://localhost:3000/tweet/findByUserId[GET]](http://localhost:3000/tweet/findByUserId[GET]) => Bir kullanıcının tüm tweetlerini getirmelidir.\n    \n3. [http://localhost:3000/tweet/findById[GET]](http://localhost:3000/tweet/findById[GET]) => Bir tweet için tüm bilgilerini getirmelidir.\n    \n4. [http://localhost:3000/tweet/:id[PUT]](http://localhost:3000/tweet/:id[PUT]) => Bir tweet üzerinde değiştirelecek kısımları update etmek için kullanılmalıdır.\n    \n5. [http://localhost:3000/tweet/:id[DELETE]](http://localhost:3000/tweet/:id[DELETE]) => Id bilgisi verilen tweeti silmek için kullanılır.(Sadece tweet sahibi ilgili tweeti silebilimelidir.)"
+		},
+		{
+			"name": "MEDIUM",
+			"item": [
+				{
+					"name": "Comment on a tweet.",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Update a comment made on a tweet.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test2@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"content\": \"Updated comment by the original user!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/comment/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a comment. Only by comment and tweet owner.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test2@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9000/comment/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"comment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"tweetId\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "dislike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"tweetId\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/dislike",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"dislike"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "1. [http://localhost:3000/comment/[POST]](http://localhost:3000/comment/[POST]) => Bir tweete bir kullanıcı tarafından yorum yazılmasını sağlar.\n    \n2. [http://localhost:3000/comment/:id[PUT]](http://localhost:3000/comment/:id[PUT]) => Bir tweete bir kullanıcı tarafından yapılan yorumun update edilmesine olanak sağlar.\n    \n3. [http://localhost:3000/comment/:id[DELETE]](http://localhost:3000/comment/:id[DELETE]) => Bir tweete bir kullanıcı tarafından yapılan yorumun silinmesini sağlar(Sadece tweet sahibi veya yorum sahibi ilgili yorumu silebilmelidir).\n    \n4. [http://localhost:3000/like/[POST]](http://localhost:3000/like/[POST]) => Bir tweete bir kullanıcı tarafından like atılmasını sağlar.\n    \n5. [http://localhost:3000/dislike/[POST]](http://localhost:3000/dislike/[POST]) => Bir tweete bir kullanıcı tarafından like atıldıysa bunun silinmesini sağlar."
+		},
+		{
+			"name": "HARD",
+			"item": [
+				{
+					"name": "retweet",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test1@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"tweetId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/retweet\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"retweet\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a retweet.",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "test1@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": 1,\n  \"tweetId\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/retweet\n",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"retweet\n"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "1. [http://localhost:3000/retweet/[POST]](http://localhost:3000/retweet/[POST]) => Bir tweetin bir kullanıcı tarafından retweet edilmesini sağlar.(Twitter üzerinden retweet özelliğini test ediniz.)\n    \n2. [http://localhost:3000/retweet/:id[DELETE]](http://localhost:3000/retweet/:id[DELETE]) => Retweet edilmiş bir tweetin silinmesi sağlanmalıdır."
+		}
+	]
+}

@@ -6,6 +6,9 @@ import com.workintech.twitter_clone_api.repository.RoleRepository;
 import com.workintech.twitter_clone_api.repository.UserRepository;
 import com.workintech.twitter_clone_api.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
     @Override
     public User register(String username, String email, String password) {
@@ -35,5 +39,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setRoles(Set.of(userRole));
 
         return userRepository.save(user);
+    }
+
+    public Authentication authenticate(UsernamePasswordAuthenticationToken authRequest) {
+        return authenticationManager.authenticate(authRequest);
     }
 }

@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,29 +27,29 @@ public class TweetController {
         return ResponseEntity.status(201).body(tweet);
     }
 
-    @GetMapping("/findByUserId")
-    public ResponseEntity<List<Tweet>> getTweetsByUserId(@RequestParam Long userId) {
+    @GetMapping("/findByUserId/{userId}")
+    public ResponseEntity<List<Tweet>> getTweetsByUserId(@PathVariable Integer userId) {
         List<Tweet> tweets = tweetService.getTweetsByUserId(userId);
         return ResponseEntity.ok(tweets);
     }
 
-    @GetMapping("/findById")
-    public ResponseEntity<Tweet> getTweetById(@RequestParam Long id) {
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<Tweet> getTweetById(@PathVariable Integer id) {
         Tweet tweet = tweetService.getTweetById(id);
         return ResponseEntity.ok(tweet);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Tweet> updateTweet(@PathVariable Long id,
+    @PatchMapping("/{id}")
+    public ResponseEntity<Tweet> updateTweet(@PathVariable Integer id,
                                              @Valid @RequestBody TweetUpdateRequest updateRequest) {
         Tweet updatedTweet = tweetService.updateTweet(id, updateRequest);
         return ResponseEntity.ok(updatedTweet);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTweet(@PathVariable Long id,
-                                              @RequestParam Long userId) {
-        tweetService.deleteTweet(id, userId);
-        return ResponseEntity.ok("Tweet successfully deleted.");
+    @PreAuthorize("@tweetSecurity.isOwner(#id, authentication.name)")
+    public ResponseEntity<Void> deleteTweet(@PathVariable Integer id) {
+        tweetService.deleteTweet(id);
+        return ResponseEntity.noContent().build();
     }
 }

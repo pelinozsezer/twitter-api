@@ -20,7 +20,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotBlank
     @Column(nullable = false, unique = true)
@@ -42,6 +42,11 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
+    @Override
+    public String getUsername() {
+        return email; // authentication.name artık email olur
+    }
 
     // UserDetails interface methods
     @Override

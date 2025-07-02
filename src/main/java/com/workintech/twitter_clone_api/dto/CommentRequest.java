@@ -13,8 +13,8 @@ public class CommentRequest {
     private String content;
 
     @NotNull
-    private Long userId;
+    private Integer userId;
 
     @NotNull
-    private Long tweetId;
+    private Integer tweetId;
 }

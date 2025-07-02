@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface TweetService {
     Tweet createTweet(TweetRequest tweetRequest);
-    List<Tweet> getTweetsByUserId(Long userId);
-    Tweet getTweetById(Long id);
-    Tweet updateTweet(Long id, TweetUpdateRequest updateRequest);
-    void deleteTweet(Long tweetId, Long userId);
+    List<Tweet> getTweetsByUserId(Integer userId);
+    Tweet getTweetById(Integer id);
+    Tweet updateTweet(Integer id, TweetUpdateRequest updateRequest);
+    void deleteTweet(Integer tweetId);
 }

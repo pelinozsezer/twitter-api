@@ -8,8 +8,8 @@ import lombok.Data;
 public class RetweetRequest {
 
     @NotNull
-    private Long userId;
+    private Integer userId;
 
     @NotNull
-    private Long tweetId;
+    private Integer tweetId;
 }

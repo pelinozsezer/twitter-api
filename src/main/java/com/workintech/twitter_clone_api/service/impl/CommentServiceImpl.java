@@ -39,30 +39,33 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment updateComment(Long commentId, Long userId, CommentUpdateRequest updateRequest) {
+    public Comment updateComment(Integer commentId, CommentUpdateRequest updateRequest, String username) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with ID: " + commentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with id: " + commentId));
 
-        if (!comment.getUser().getId().equals(userId)) {
-            throw new UnauthorizedActionException("You are not allowed to update this comment.");
+        if (!comment.getUser().getUsername().equals(username)) {
+            throw new SecurityException("You are not allowed to update this comment.");
         }
 
         comment.setContent(updateRequest.getContent());
         return commentRepository.save(comment);
     }
 
+
+
     @Override
-    public void deleteComment(Long commentId, Long userId) {
+    public void deleteComment(Integer commentId, String username) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with ID: " + commentId));
+                .orElseThrow(() -> new ResourceNotFoundException("Comment not found with id: " + commentId));
 
-        Long commentOwnerId = comment.getUser().getId();
-        Long tweetOwnerId = comment.getTweet().getUser().getId();
+        boolean isCommentOwner = comment.getUser().getUsername().equals(username);
+        boolean isTweetOwner = comment.getTweet().getUser().getUsername().equals(username);
 
-        if (!userId.equals(commentOwnerId) && !userId.equals(tweetOwnerId)) {
-            throw new UnauthorizedActionException("You are not authorized to delete this comment.");
+        if (!isCommentOwner && !isTweetOwner) {
+            throw new SecurityException("You are not allowed to delete this comment.");
         }
 
         commentRepository.delete(comment);
     }
+
 }

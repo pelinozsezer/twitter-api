@@ -6,6 +6,6 @@ import com.workintech.twitter_clone_api.entity.Comment;
 
 public interface CommentService {
     Comment createComment(CommentRequest commentRequest);
-    Comment updateComment(Long commentId, Long userId, CommentUpdateRequest updateRequest);
-    void deleteComment(Long commentId, Long userId);
+    Comment updateComment(Integer commentId, CommentUpdateRequest updateRequest, String username);
+    void deleteComment(Integer commentId, String username);
 }

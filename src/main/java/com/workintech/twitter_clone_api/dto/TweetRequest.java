@@ -13,5 +13,5 @@ public class TweetRequest {
     private String content;
 
     @NotNull
-    private Long userId;  // Tweet owner
+    private Integer userId;  // Tweet owner
 }

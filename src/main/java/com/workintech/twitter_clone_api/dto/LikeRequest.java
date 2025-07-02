@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class LikeRequest {
     @NotNull
-    private Long userId;
+    private Integer userId;
 
     @NotNull
-    private Long tweetId;
+    private Integer tweetId;
 }

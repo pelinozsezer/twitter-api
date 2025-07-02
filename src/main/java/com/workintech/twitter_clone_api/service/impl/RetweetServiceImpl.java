@@ -43,14 +43,15 @@ public class RetweetServiceImpl implements RetweetService {
     }
 
     @Override
-    public void deleteRetweet(Long retweetId, Long userId) {
+    public void deleteRetweet(Integer retweetId, String username) {
         Retweet retweet = retweetRepository.findById(retweetId)
                 .orElseThrow(() -> new ResourceNotFoundException("Retweet not found with ID: " + retweetId));
 
-        if (!retweet.getUser().getId().equals(userId)) {
+        if (!retweet.getUser().getUsername().equals(username)) {
             throw new UnauthorizedActionException("You are not allowed to delete this retweet.");
         }
 
         retweetRepository.delete(retweet);
     }
+
 }

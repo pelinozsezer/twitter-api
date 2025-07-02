@@ -5,5 +5,6 @@ import com.workintech.twitter_clone_api.entity.Retweet;
 
 public interface RetweetService {
     Retweet retweet(RetweetRequest request);
-    void deleteRetweet(Long retweetId, Long userId);
+    void deleteRetweet(Integer retweetId, String username);
+
 }
