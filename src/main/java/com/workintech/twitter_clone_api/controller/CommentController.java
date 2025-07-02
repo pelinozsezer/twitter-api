@@ -36,6 +36,4 @@ public class CommentController {
         commentService.deleteComment(id, userId);
         return ResponseEntity.ok("Comment successfully deleted.");
     }
-
-
 }

@@ -9,9 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-
 
 @Entity
 @Data
@@ -45,7 +43,7 @@ public class User implements UserDetails {
     )
     private Set<Role> roles;
 
-    // ✅ UserDetails interface metodları
+    // UserDetails interface methods
     @Override
     public boolean isAccountNonExpired() { return true; }
 
@@ -58,11 +56,8 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() { return true; }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
     }
-
-
 }

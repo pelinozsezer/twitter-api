@@ -12,8 +12,4 @@ public interface TweetService {
     Tweet getTweetById(Long id);
     Tweet updateTweet(Long id, TweetUpdateRequest updateRequest);
     void deleteTweet(Long tweetId, Long userId);
-
-
-
-
 }

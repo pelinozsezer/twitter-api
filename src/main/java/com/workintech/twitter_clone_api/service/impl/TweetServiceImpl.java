@@ -69,7 +69,4 @@ public class TweetServiceImpl implements TweetService {
 
         tweetRepository.delete(tweet);
     }
-
-
-
 }

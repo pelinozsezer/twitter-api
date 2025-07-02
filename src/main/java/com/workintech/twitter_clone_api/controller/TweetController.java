@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +38,6 @@ public class TweetController {
         return ResponseEntity.ok(tweet);
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<Tweet> updateTweet(@PathVariable Long id,
                                              @Valid @RequestBody TweetUpdateRequest updateRequest) {
@@ -53,8 +51,4 @@ public class TweetController {
         tweetService.deleteTweet(id, userId);
         return ResponseEntity.ok("Tweet successfully deleted.");
     }
-
-
-
-
 }

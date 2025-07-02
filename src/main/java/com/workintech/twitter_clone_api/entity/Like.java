@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Entity
 @Table(name="likes", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "tweet_id"}))
 @Data

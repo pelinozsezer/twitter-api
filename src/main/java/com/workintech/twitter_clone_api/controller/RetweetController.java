@@ -27,5 +27,4 @@ public class RetweetController {
         retweetService.deleteRetweet(id, userId);
         return ResponseEntity.ok("Retweet successfully deleted.");
     }
-
 }

@@ -26,5 +26,4 @@ public class LikeController {
         likeService.dislikeTweet(request);
         return ResponseEntity.ok("Like removed successfully.");
     }
-
 }
