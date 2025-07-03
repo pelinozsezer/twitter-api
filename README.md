@@ -1,4 +1,9 @@
-# NOT COMPLETE YET
+# 🚧 Work in progress – not complete yet.
+# Project TODOs 
+
+- [ ] Add JWT-based authentication
+- [ ] Write tests
+- [ ] Add frontend
 
 # twitter-clone-api
 
